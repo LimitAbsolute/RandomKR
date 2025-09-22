@@ -4,7 +4,7 @@ from collections import deque
 
 '''
 pack: 
-pyinstaller -F random_kr_en.py -n "KR Series Random Challenge [en]" -i E:\编程作业\python\python_demo\pic\icon.png
+pyinstaller -F random_kr_en.py -n "KR Series Random Challenge [en]" -i E:\编程作业\Python\RandomKR\pic\icon.png
 Configuration Instructions: 
 hero: Hero array
 tower: Defense Tower Array

@@ -4,7 +4,7 @@ from collections import deque
 
 '''
 打包：
-pyinstaller -F random_kr.py -n 王国保卫战系列随机挑战 -i E:\编程作业\python\python_demo\pic\icon.png
+pyinstaller -F random_kr.py -n 王国保卫战系列随机挑战 -i E:\编程作业\Python\RandomKR\pic\icon.png
 配置说明：
 hero：英雄数组
 tower：防御塔数组
