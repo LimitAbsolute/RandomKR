@@ -109,7 +109,7 @@ GAME_CONFIG = {
                   "16.Hunger's Peak", '17.Misty Ruins', '18.Deepleaf Outpost', '19.Temple of the Fallen', '20.Arborean Hamlet',
                   '21.The Sunken Ruins', '22.Starving Hollow', '23.Darksteel Gates', '24.Frantic Assembly', '25.Colossal Core',
                   '26.Replication Chamber', '27.Dominion Dome', '28.Defiled Temple', '29.Breeding Chamber', '30.The Forgotten Throne',
-                  '31.', '32.', '33.', '34.', '35.'],
+                  '31.Celestial Monkey Forest', '32.Fire Dragon Cave', '33.Tempest Island', '34.The Eye of the Storm', '35.The Demon King Stronghold'],
         'selection_rules': {
             'hero': {'count': 2, 'memory_size_range': (1, 10)},
             'tower': {'count': 5, 'memory_size_range': (1, 10)},
