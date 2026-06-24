@@ -9,23 +9,27 @@ pyinstaller -F random_kr.py -n KR_Series_Random_Challenge_cn -i E:\编程作业\
 配置说明：
 hero：英雄数组
 tower：防御塔数组
+power：法术数组
 level：关卡数组
 '''
+
 # 常量定义
 GAME_MODES = {
     '1': 'kr',
     '2': 'krf',
     '3': 'kro',
     '4': 'krv',
-    '5': 'kra'
+    '5': 'kra',
+    '6': 'krg'
 }
-CHALLENGE_TYPES = ('英雄挑战', '钢铁挑战')
+
 # 一次性输出的挑战次数
 CHALLENGES_COUNT = 5
 
 # 游戏配置
 GAME_CONFIG = {
     'kr': {
+        'challenge_types': ('英雄挑战', '钢铁挑战'),
         'hero': ['逐光者·杰拉尔德', '迅风·艾莉瑞雅', '愤怒之锤·马利克', '火炮杀手·博林', '灾祸魔导·马格纳斯',
                  '炎之魔神·伊格纳斯', '国王·迪纳斯', '冬之歌·伊罗拉', '熊爪·英格瓦', '钢锯',
                  '鬼侍', '索尔', '天十'],
@@ -41,6 +45,7 @@ GAME_CONFIG = {
         }
     },
     'krf': {
+        'challenge_types': ('英雄挑战', '钢铁挑战'),
         'hero': ['阿尔里奇', '幻影', '黑棘船长', '克罗南', '女巫',
                  '纽维斯', '德得尔', '格劳尔', '沙塔', '阿什比特',
                  '巨蟹', '库绍', '但丁', '波恩哈特', '卡兹',
@@ -56,6 +61,7 @@ GAME_CONFIG = {
         }
     },
     'kro': {
+        'challenge_types': ('英雄挑战', '钢铁挑战'),
         'hero': ['艾利丹', '埃里汎', '卡莎', '雷格森', '迪纳斯王子',
                  '瑞兹与大瑞格', '无畏树人', '维兹南', '鑫', '凤凰',
                  '杜拉斯', '莉恩', '布鲁斯', '莉莉丝', '威尔伯',
@@ -71,6 +77,7 @@ GAME_CONFIG = {
         }
     },
     'krv': {
+        'challenge_types': ('英雄挑战', '钢铁挑战'),
         'hero': ['维鲁克', '阿斯拉', '奥洛克', '苦楝夫人', '墨忒弥斯',
                  '特拉敏', '极狗', '贝雷萨德', '毁灭坦克SG-11', '浚湃',
                  '艾斯库特', '墨尔古伦', '南瓜灯杰克', '电云', '格罗什',
@@ -96,6 +103,7 @@ GAME_CONFIG = {
         }
     },
     'kra': {
+        'challenge_types': ('英雄挑战', '钢铁挑战'),
         'hero': ['维斯珀', '蕾琳', '尼鲁', '托雷斯', '安雅',
                  '格里姆森', '布卢登', '赛莉恩', '奥纳格罗', '战争巨头',
                  '卢米妮尔', '科斯米尔', '斯特蕾吉', '喀拉托', '波恩哈特',
@@ -118,6 +126,22 @@ GAME_CONFIG = {
             'tower': {'count': 5, 'memory_size_range': (1, 10)},
             'level': {'count': 1, 'memory_size_range': (1, 10)}
         }
+    },
+    'krg': {
+        'challenge_types': ('钢铁挑战', '闪电急袭挑战', '王国塔防', '英雄集结', '经典·王国保卫战'),
+        'hero': ['杰拉尔德', '泽菲菈', '博林', '康纳', '马利克',
+                 '罗德', '杰米娜', '伊格纳斯', '德拉坎', '阿什比特'],
+        'tower': ['弓兵要塞', '守卫骑士团', '皇家投石机', '魔典学者', '矮人扩散炮',
+                  '精灵精英游侠', '野猫女猎手', '日耀大师', '光明女祭司', '铁木树人'],
+        'power': ['援军', '火雨', '皇家号令', '传送符印', '侏儒商店'],
+        'level': ['1.利尼维亚城', '2.奥术魔法学院', '3.遭受入侵的农田', '4.西部防壁', '5.银橡村',
+                  '6.洛扎贡之塔'],
+        'selection_rules': {
+            'hero': {'count': 2, 'memory_size_range': (1, 3)},
+            'tower': {'count': 5, 'memory_size_range': (1, 3)},
+            'power': {'count': 3, 'memory_size_range': (1, 3)},
+            'level': {'count': 1, 'memory_size_range': (1, 3)}
+        }
     }
 }
 
@@ -134,15 +158,12 @@ class PoolManager:
 
     def get_selection(self):
         """获取排除近期记忆的随机选择"""
-        # 排除最近使用过的元素
         available = [i for i in self.original_pool if i not in self.memory]
 
-        # 如果可用元素不足，清空记忆重新尝试
         if len(available) < self.select_count:
             self.memory.clear()
             available = self.original_pool.copy()
 
-        # 随机选择并更新记忆
         selected = random.sample(available, self.select_count)
         self.memory.extend(selected)
         return selected
@@ -158,11 +179,11 @@ class GameManager:
 
     def __init__(self, config_name):
         self.config = GAME_CONFIG[config_name]
+        self.challenge_types = self.config['challenge_types']
         self.memory_sizes = {}
         self.pools = self._init_pools()
 
     def _init_pools(self):
-        """初始化所有选择池"""
         pools = {}
         for key, rule in self.config['selection_rules'].items():
             memory_size = random.randint(*rule['memory_size_range'])
@@ -177,21 +198,22 @@ class GameManager:
     def generate_challenge(self):
         """生成一次完整挑战"""
         result = {key: pool.get_selection() for key, pool in self.pools.items()}
-        result.update({'challenge_type': random.choice(CHALLENGE_TYPES)})
+        result['challenge_type'] = random.choice(self.challenge_types)
         return result
 
     def generate_multiple_challenges(self, count=5):
-        """生成多个挑战"""
         return [self.generate_challenge() for _ in range(count)]
 
 
 def print_memory_sizes(managers):
-    """打印各游戏模式的记忆池大小详细信息"""
+    """打印各游戏模式的记忆池容量详细信息"""
     print('*记忆池容量配置')
     for mode, manager in managers.items():
         result = f'{GAME_MODES[mode].upper()}模式（英雄池：{manager.memory_sizes["hero"]}，'
         if 'tower' in manager.memory_sizes:
             result += f'防御塔池：{manager.memory_sizes["tower"]}，'
+        if 'power' in manager.memory_sizes:
+            result += f'法术池：{manager.memory_sizes["power"]}，'
         result += f'关卡池：{manager.memory_sizes["level"]}）'
         print(result)
     print()
@@ -200,9 +222,10 @@ def print_memory_sizes(managers):
 def print_star_box(selections):
     """带边框的输出格式化"""
     lines = [f'【随机英雄】{"，".join(selections["hero"])}']
-    # KR1-3代没有选塔功能
     if 'tower' in selections:
         lines.append(f'【随机防御塔】{"，".join(selections["tower"])}')
+    if 'power' in selections:
+        lines.append(f'【随机法术】{"，".join(selections["power"])}')
     lines.append(f'【随机关卡】{selections["level"][0]}')
     lines.append(f'【不妨试试】{selections["challenge_type"]}')
 
@@ -215,22 +238,20 @@ def print_star_box(selections):
 
 def print_multiple_challenges(challenges):
     """一次生成多个随机挑战"""
-    for i in challenges:
-        print_star_box(i)
+    for challenge in challenges:
+        print_star_box(challenge)
 
 
 if __name__ == '__main__':
-    # 初始化游戏管理器
-    # 只初始化已配置的游戏模式
+    # 初始化游戏管理器（只初始化已配置的模式）
     managers = {
         num: GameManager(mode)
         for num, mode in GAME_MODES.items()
         if mode in GAME_CONFIG
     }
-    # 打印记忆池大小详细信息
     print_memory_sizes(managers)
     while True:
-        choice = input(f'输入 1-5 生成{CHALLENGES_COUNT}个对应KR系列挑战，输入 0 退出：')
+        choice = input(f'输入 1-6 生成{CHALLENGES_COUNT}个对应KR系列挑战，输入 0 退出：')
         if choice == '0':
             print('程序已退出！')
             break

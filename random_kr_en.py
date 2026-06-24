@@ -7,7 +7,8 @@ pack:
 pyinstaller -F random_kr_en.py -n KR_Series_Random_Challenge_en -i E:\编程作业\Python\RandomKR\pic\icon.png
 Configuration Instructions: 
 hero: Hero array
-tower: Defense Tower Array
+tower: Defense Tower array
+power: Power array
 level: Level array
 '''
 # constant definition
@@ -16,21 +17,25 @@ GAME_MODES = {
     '2': 'krf',
     '3': 'kro',
     '4': 'krv',
-    '5': 'kra'
+    '5': 'kra',
+    '6': 'krg'
 }
-CHALLENGE_TYPES = ('Heroic Challenge', 'Iron Challenge')
+
 # The number of challenges for one-time output
 CHALLENGES_COUNT = 5
 
 # Game configuration
 GAME_CONFIG = {
     'kr': {
-        'hero': ['Sir. Gerald Lightseeker', 'Alleria Swiftwind', 'Malik Hammerfury', 'Bolin Farslayer', 'Magnus Spellbane',
+        'challenge_types': ('Heroic Challenge', 'Iron Challenge'),
+        'hero': ['Sir. Gerald Lightseeker', 'Alleria Swiftwind', 'Malik Hammerfury', 'Bolin Farslayer',
+                 'Magnus Spellbane',
                  'Ignus', 'King Denas', 'Elora Wintersong', 'Ingvar Bearclaw', 'Hacksaw',
                  'Oni', 'Thor', "Ten'Shí"],
         'level': ['1.Southport', '2.The Farmlands', '3.Pagras', '4.Twin Rivers', '5.Silveroak Forest',
                   '6.The Citadel', '7.Coldstep Mines', '8.Icewind Pass', '9.Stormcloud Temple', '10.The Wastes',
-                  '11.Forsaken Valley', '12.The Dark Tower', "13.Sarelgaz's Lair", '14.Ruins of Acaroth', '15.Rotten Forest',
+                  '11.Forsaken Valley', '12.The Dark Tower', "13.Sarelgaz's Lair", '14.Ruins of Acaroth',
+                  '15.Rotten Forest',
                   '16.Hushwood', "17.Bandit's Lair", '18.Glacial Heights', "19.Ha'Kraj Plateau", '20.Pit of Fire',
                   '21.Pandaemonium', '22.Fungal Forest', '23.Rotwick', '24.Ancient Necropolis', '25.Nightfang Swale',
                   '26.Castle Blackburn'],
@@ -40,13 +45,15 @@ GAME_CONFIG = {
         }
     },
     'krf': {
+        'challenge_types': ('Heroic Challenge', 'Iron Challenge'),
         'hero': ['Alric', 'Mirage', 'Captain Blackthorne', 'Cronan', 'Bruxa',
                  'Nivus', 'Dierdre', 'Grawl', "Sha'tra", 'Ashbite',
                  'Karkinos', 'Kutsao', 'Dante', 'Bonehart', 'Kahz',
                  'Saitam'],
         'level': ['1.Hammerhold', '2.Sandhawk Hamlet', '3.Sape Oasis', '4.Dunes of Despair', "5.Buccaneer's Den",
                   "6.Nazeru's Gates", '7.Crimson Valley', '8.Snapvine Bridge', '9.Lost Jungle', "10.Ma'qwa Urqu",
-                  '11.Temple of Saqra', '12.The Underpass', "13.Beresad's Lair", '14.The Dark Descent', '15.Emberspike Depths',
+                  '11.Temple of Saqra', '12.The Underpass', "13.Beresad's Lair", '14.The Dark Descent',
+                  '15.Emberspike Depths',
                   '16.Port Tortuga', '17.Storm Atoll', '18.The Sunken Citadel', '19.Bonesburg', '20.Desecrated Grove',
                   '21.Dusk Chateau', '22.Darklight Depths'],
         'selection_rules': {
@@ -55,14 +62,17 @@ GAME_CONFIG = {
         }
     },
     'kro': {
+        'challenge_types': ('Heroic Challenge', 'Iron Challenge'),
         'hero': ['Eridan', 'Arivan', 'Catha', "Reg'son", 'Prince Denas',
                  'Razz and Rags', 'Bravebark', "Vez'nan", 'Xin', 'Phoenix',
                  'Durax', 'Lynn', 'Bruce', 'Lilith', 'Wilbur',
                  'Faustus'],
         'level': ['1.Gray Ravens', '2.The High Cross', '3.Waterfalls Trail', '4.Redwood Stand', '5.Royal Gardens',
                   '6.Gryphon Point', '7.Rockhenge', '8.Grimmsburg', '9.The Crystal Lake', '10.Neverwonder',
-                  '11.The Unseelie Court', '12.The Ascent', '13.Arcane Quarters', "14.Mactans' Retreat", '15.Shrine of Elynie',
-                  "16.Galadrian's Wall", '17.Blood Quarry', "18.Beheader's Seat", '19.Duskwood Outpost', '20.Duredhel Outskirts',
+                  '11.The Unseelie Court', '12.The Ascent', '13.Arcane Quarters', "14.Mactans' Retreat",
+                  '15.Shrine of Elynie',
+                  "16.Galadrian's Wall", '17.Blood Quarry', "18.Beheader's Seat", '19.Duskwood Outpost',
+                  '20.Duredhel Outskirts',
                   '21.Dwaraman Gates', '22.Tainted Pit'],
         'selection_rules': {
             'hero': {'count': 1, 'memory_size_range': (1, 10)},
@@ -70,6 +80,7 @@ GAME_CONFIG = {
         }
     },
     'krv': {
+        'challenge_types': ('Heroic Challenge', 'Iron Challenge'),
         'hero': ['Veruk', 'Asra', 'Oloch', 'Margosa', 'Mortemis',
                  'Tramin', 'Jigou', 'Beresad', 'Doom Tank SG-11', "Jun'Pai",
                  'Eiskalt', 'Murglun', "Jack O'Lantern", 'Dianyun', 'Grosh',
@@ -79,14 +90,22 @@ GAME_CONFIG = {
                   'Orc Shaman', 'Grim Cemetery', 'Rotten Forest', 'Wicked Sisters', 'Blazing Gem',
                   'Goblin War Zeppelin', "Deep Devil's Reef", 'Swamp Thing', 'Shaolin Temple', 'Ignis Altar',
                   'Sandworm Hollow', 'Ogre Shipwreck'],
-        'level': ["1.Dwarven Gate", '2.Corridors of the Old City', '3.Kazan Mines', '4.Golden Brewery', '5.Clockwork Factory',
-                  "6.Bolgur's Throne", "7.Northerners' Outpost", '8.Frozen Rapids', "9.Northerners' Village", "10.Dragons' Boneyard",
-                  "11.Jokull's Nest", '12.Otil Farmlands', '13.Silveroak Outpost', '14.City of Lozagon', '15.Lightseeker Camp',
-                  "16.Denas's Castle", '17.Maginicia Shores', '18.Anurian Plaza', '19.Pond of the Sage', '20.Breaking the Ice',
-                  '21.Into the Mountains', '22.The Frozen Throne', '23.Ancient Gate', '24.City of Rivers', "25.Dragon's Power",
-                  '26.Back To The Rotten Forest', '27.A Night In The Swamp', '28.The Ancient Ghosts', '29.Excavation Gateway', '30.Lost Passage',
-                  '31.The Original World', "32.Wizard's Landing", '33.Sape Oasis', '34.The Lost Empire', '35.Hammerhold Streets',
-                  '36.The Grand Arena', '37.Corsairs Brotherhood', '38.Monkey Island', '39.Sharkpool Reef', '40.Skullwreck Bay',
+        'level': ["1.Dwarven Gate", '2.Corridors of the Old City', '3.Kazan Mines', '4.Golden Brewery',
+                  '5.Clockwork Factory',
+                  "6.Bolgur's Throne", "7.Northerners' Outpost", '8.Frozen Rapids', "9.Northerners' Village",
+                  "10.Dragons' Boneyard",
+                  "11.Jokull's Nest", '12.Otil Farmlands', '13.Silveroak Outpost', '14.City of Lozagon',
+                  '15.Lightseeker Camp',
+                  "16.Denas's Castle", '17.Maginicia Shores', '18.Anurian Plaza', '19.Pond of the Sage',
+                  '20.Breaking the Ice',
+                  '21.Into the Mountains', '22.The Frozen Throne', '23.Ancient Gate', '24.City of Rivers',
+                  "25.Dragon's Power",
+                  '26.Back To The Rotten Forest', '27.A Night In The Swamp', '28.The Ancient Ghosts',
+                  '29.Excavation Gateway', '30.Lost Passage',
+                  '31.The Original World', "32.Wizard's Landing", '33.Sape Oasis', '34.The Lost Empire',
+                  '35.Hammerhold Streets',
+                  '36.The Grand Arena', '37.Corsairs Brotherhood', '38.Monkey Island', '39.Sharkpool Reef',
+                  '40.Skullwreck Bay',
                   '41.Treasure Island'],
         'selection_rules': {
             'hero': {'count': 1, 'memory_size_range': (1, 10)},
@@ -95,6 +114,7 @@ GAME_CONFIG = {
         }
     },
     'kra': {
+        'challenge_types': ('Heroic Challenge', 'Iron Challenge'),
         'hero': ['Vesper', 'Raelyn', 'Nyru', 'Torres', 'Anya',
                  'Grimson', 'Broden', 'Therien', 'Onagro', 'Warhead',
                  'Lumenir', 'Kosmyr', 'Stregi', 'Kratoa', 'Bonehart',
@@ -104,18 +124,42 @@ GAME_CONFIG = {
                   'Dwarven Flamespitter', 'Dune Sentinels', 'Rocket Gunners', 'Eldritch Channeler', 'Grim Wraiths',
                   'Twilight Longbows', 'Bog Hermit', 'Cannoneer Squad', 'Surge Colossus', 'Bamboo Masters',
                   'Dragon Hatchery'],
-        'level': ['1.Sea of Trees', '2.The Guardian Gate', '3.The Heart of the Forest', '4.Emerald Treetops', '5.Ravaged Outskirts',
-                  '6.The Wildbeast Den', '7.Bleak Valley', '8.Carmine Mines', '9.Wicked Crossing', '10.Temple Courtyard',
-                  '11.Canyon Plateau', '12.Blighted Farmlands', '13.Desecrated Temple', '14.Corruption Valley', '15.The Eyesore Tower',
-                  "16.Hunger's Peak", '17.Misty Ruins', '18.Deepleaf Outpost', '19.Temple of the Fallen', '20.Arborean Hamlet',
-                  '21.The Sunken Ruins', '22.Starving Hollow', '23.Darksteel Gates', '24.Frantic Assembly', '25.Colossal Core',
-                  '26.Replication Chamber', '27.Dominion Dome', '28.Defiled Temple', '29.Breeding Chamber', '30.The Forgotten Throne',
-                  '31.Celestial Monkey Forest', '32.Fire Dragon Cave', '33.Tempest Island', '34.The Eye of the Storm', '35.The Demon King Stronghold',
-                  "36.Dragon's Gate", '37.Warden Fortress', '38.Inner Sanctuary', '39.The Breeding Ground', '40.Crown of the Cloud Realm'],
+        'level': ['1.Sea of Trees', '2.The Guardian Gate', '3.The Heart of the Forest', '4.Emerald Treetops',
+                  '5.Ravaged Outskirts',
+                  '6.The Wildbeast Den', '7.Bleak Valley', '8.Carmine Mines', '9.Wicked Crossing',
+                  '10.Temple Courtyard',
+                  '11.Canyon Plateau', '12.Blighted Farmlands', '13.Desecrated Temple', '14.Corruption Valley',
+                  '15.The Eyesore Tower',
+                  "16.Hunger's Peak", '17.Misty Ruins', '18.Deepleaf Outpost', '19.Temple of the Fallen',
+                  '20.Arborean Hamlet',
+                  '21.The Sunken Ruins', '22.Starving Hollow', '23.Darksteel Gates', '24.Frantic Assembly',
+                  '25.Colossal Core',
+                  '26.Replication Chamber', '27.Dominion Dome', '28.Defiled Temple', '29.Breeding Chamber',
+                  '30.The Forgotten Throne',
+                  '31.Celestial Monkey Forest', '32.Fire Dragon Cave', '33.Tempest Island', '34.The Eye of the Storm',
+                  '35.The Demon King Stronghold',
+                  "36.Dragon's Gate", '37.Warden Fortress', '38.Inner Sanctuary', '39.The Breeding Ground',
+                  '40.Crown of the Cloud Realm'],
         'selection_rules': {
             'hero': {'count': 2, 'memory_size_range': (1, 10)},
             'tower': {'count': 5, 'memory_size_range': (1, 10)},
             'level': {'count': 1, 'memory_size_range': (1, 10)}
+        }
+    },
+    'krg': {
+        'challenge_types': ('Iron Challenge', 'Blitz Challenge', 'Spell Rush', 'Hero Party', 'Classic Rush'),
+        'hero': ['Gerald', 'Zefira', 'Bolin', 'Connor', 'Malik',
+                 'Rhodes', 'Gemina', 'Ignus', 'Drakkan', 'Ashbite'],
+        'tower': ['Archer Garrison', 'Knights Order', 'Royal Catapult', 'Scholar Mage', 'Dwarven Culverin',
+                  'Elven Elite Ranger', 'Wildcat Huntresses', 'Sunray Master', 'Light Priestess', 'Ironbark Treant'],
+        'power': ['Reinforcements', 'Rain of Fire', 'Royal Edict', 'Teleportation Sigil', "Gnome's Shop"],
+        'level': ['1.Linirean Castle', '2.Arcane Academy', '3.Raided Farmlands', '4.Western Wall', '5.Silveroak Village',
+                  '6.Logazon Tower'],
+        'selection_rules': {
+            'hero': {'count': 2, 'memory_size_range': (1, 3)},
+            'tower': {'count': 5, 'memory_size_range': (1, 3)},
+            'power': {'count': 3, 'memory_size_range': (1, 3)},
+            'level': {'count': 1, 'memory_size_range': (1, 3)}
         }
     }
 }
@@ -157,6 +201,7 @@ class GameManager:
 
     def __init__(self, config_name):
         self.config = GAME_CONFIG[config_name]
+        self.challenge_types = self.config['challenge_types']
         self.memory_sizes = {}
         self.pools = self._init_pools()
 
@@ -176,7 +221,7 @@ class GameManager:
     def generate_challenge(self):
         """Generate a complete challenge"""
         result = {key: pool.get_selection() for key, pool in self.pools.items()}
-        result.update({'challenge_type': random.choice(CHALLENGE_TYPES)})
+        result.update({'challenge_type': random.choice(self.challenge_types)})
         return result
 
     def generate_multiple_challenges(self, count=5):
@@ -191,6 +236,8 @@ def print_memory_sizes(managers):
         result = f'{GAME_MODES[mode].upper()} Mode (Hero Pool: {manager.memory_sizes["hero"]}, '
         if 'tower' in manager.memory_sizes:
             result += f'Defense Tower Pool: {manager.memory_sizes["tower"]}, '
+        if 'power' in manager.memory_sizes:
+            result += f'Power Pool: {manager.memory_sizes["power"]}，'
         result += f'Level Pool: {manager.memory_sizes["level"]})'
         print(result)
     print()
@@ -199,9 +246,10 @@ def print_memory_sizes(managers):
 def print_star_box(selections):
     """Format output with borders"""
     lines = [f'[RANDOM HERO] {", ".join(selections["hero"])}']
-    # KR1-3 generation does not have tower selection function
     if 'tower' in selections:
         lines.append(f'[RANDOM DEFENSE TOWER] {", ".join(selections["tower"])}')
+    if 'power' in selections:
+        lines.append(f'【RANDOM POWER】{", ".join(selections["power"])}')
     lines.append(f'[RANDOM LEVEL] {selections["level"][0]}')
     lines.append(f'[WHY NOT GIVE IT A TRY] {selections["challenge_type"]}')
 
@@ -229,7 +277,8 @@ if __name__ == '__main__':
     # Print detailed information on memory pool size
     print_memory_sizes(managers)
     while True:
-        choice = input(f'Enter 1-5 to generate {CHALLENGES_COUNT} corresponding KR series challenges, enter 0 to exit: ')
+        choice = input(
+            f'Enter 1-6 to generate {CHALLENGES_COUNT} corresponding KR series challenges, enter 0 to exit: ')
         if choice == '0':
             print('The program has exited!')
             break
