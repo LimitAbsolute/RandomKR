@@ -149,17 +149,20 @@ GAME_CONFIG = {
     'krg': {
         'challenge_types': ('Iron Challenge', 'Blitz Challenge', 'Spell Rush', 'Hero Party', 'Classic Rush'),
         'hero': ['Gerald', 'Zefira', 'Bolin', 'Connor', 'Malik',
-                 'Rhodes', 'Gemina', 'Ignus', 'Drakkan', 'Ashbite'],
+                 'Rhodes', 'Gemina', 'Ignus', 'Illiana', 'Oni',
+                 'Drakkan', 'Ashbite'],
         'tower': ['Archer Garrison', 'Knights Order', 'Royal Catapult', 'Scholar Mage', 'Dwarven Culverin',
-                  'Elven Elite Ranger', 'Wildcat Huntresses', 'Sunray Master', 'Light Priestess', 'Ironbark Treant'],
-        'power': ['Reinforcements', 'Rain of Fire', 'Royal Edict', 'Teleportation Sigil', "Gnome's Shop"],
+                  'Elven Elite Ranger', 'Wildcat Huntresses', 'Gold Prospectors', 'Sunray Master', 'Cursed Crossbows',
+                  'Alchemist Shack', 'Ironbark Treant', 'Light Priestess', 'Arcane Forger', 'Sentry Watchtower'],
+        'power': ['Reinforcements', 'Rain of Fire', 'Royal Edict', 'Teleportation Sigil', 'Ace Musketeers',
+                  'Soaring Shop', 'Thunder Zapper', "Wintersong's Wrath", 'Aspect of Sol'],
         'level': ['1.Linirean Castle', '2.Arcane Academy', '3.Raided Farmlands', '4.Western Wall', '5.Silveroak Village',
                   '6.Logazon Tower'],
         'selection_rules': {
-            'hero': {'count': 2, 'memory_size_range': (1, 3)},
-            'tower': {'count': 5, 'memory_size_range': (1, 3)},
-            'power': {'count': 3, 'memory_size_range': (1, 3)},
-            'level': {'count': 1, 'memory_size_range': (1, 3)}
+            'hero': {'count': 2, 'memory_size_range': (1, 10)},
+            'tower': {'count': 5, 'memory_size_range': (1, 10)},
+            'power': {'count': 3, 'memory_size_range': (1, 5)},
+            'level': {'count': 1, 'memory_size_range': (1, 10)}
         }
     }
 }
