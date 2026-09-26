@@ -5,7 +5,7 @@ from collections import deque
 '''
 王国保卫战系列随机挑战
 打包：
-pyinstaller -F random_kr.py -n KR_Series_Random_Challenge_cn -i E:\编程作业\Python\RandomKR\pic\icon.png
+pyinstaller -F random_kr.py -n KR_Series_Random_Challenge_cn -i E:\编程作业\Python\RandomKR\pic\krg.png
 配置说明：
 hero：英雄数组
 tower：防御塔数组
@@ -128,7 +128,7 @@ GAME_CONFIG = {
         }
     },
     'krg': {
-        'challenge_types': ('钢铁挑战', '闪电急袭挑战', '王国塔防', '英雄集结', '经典模式'),
+        'challenge_types': ('钢铁挑战', '闪电挑战', '法术狂潮', '英雄集结', '经典模式'),
         'hero': ['杰拉尔德', '泽菲菈', '博林', '康纳', '马利克',
                  '罗德', '杰米娜', '伊格纳斯', '伊莉安娜', '鬼侍',
                  '德拉坎', '阿什比特'],
@@ -137,8 +137,10 @@ GAME_CONFIG = {
                   '炼金术士小屋', '铁木树精', '光明女祭司', '奥术幻铸师', '哨兵瞭望塔'],
         'power': ['援军', '火雨', '皇家号令', '传送符印', '王牌火枪手',
                   '侏儒商店', '放电工程师', '凌冬怒咏', '索罗化身'],
-        'level': ['1.利尼维亚城', '2.奥术魔法学院', '3.遭受入侵的农田', '4.西部防壁', '5.银橡村',
-                  '6.洛扎贡之塔'],
+        'level': ['1.利尼维亚城堡', '2.奥术魔法学院', '3.遭受入侵的农田', '4.西部防壁', '5.银橡村',
+                  '6.洛扎贡之塔', '7.三面伏击', '8.阿卡洛斯要塞', '9.险峻路途', '10.雪怪巢穴',
+                  '11.极冻深巢', '12.哈克拉吉村', '13.暴云寺院大堂', '14.光芯镇', '15.布莱克本城堡',
+                  '16.金色林地', '17.圣骑士圣域', '18.卫兹南之塔'],
         'selection_rules': {
             'hero': {'count': 2, 'memory_size_range': (1, 10)},
             'tower': {'count': 5, 'memory_size_range': (1, 10)},

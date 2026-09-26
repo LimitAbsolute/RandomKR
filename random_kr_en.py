@@ -4,7 +4,7 @@ from collections import deque
 
 '''
 pack: 
-pyinstaller -F random_kr_en.py -n KR_Series_Random_Challenge_en -i E:\编程作业\Python\RandomKR\pic\icon.png
+pyinstaller -F random_kr_en.py -n KR_Series_Random_Challenge_en -i E:\编程作业\Python\RandomKR\pic\krg.png
 Configuration Instructions: 
 hero: Hero array
 tower: Defense Tower array
@@ -34,8 +34,7 @@ GAME_CONFIG = {
                  'Oni', 'Thor', "Ten'Shí"],
         'level': ['1.Southport', '2.The Farmlands', '3.Pagras', '4.Twin Rivers', '5.Silveroak Forest',
                   '6.The Citadel', '7.Coldstep Mines', '8.Icewind Pass', '9.Stormcloud Temple', '10.The Wastes',
-                  '11.Forsaken Valley', '12.The Dark Tower', "13.Sarelgaz's Lair", '14.Ruins of Acaroth',
-                  '15.Rotten Forest',
+                  '11.Forsaken Valley', '12.The Dark Tower', "13.Sarelgaz's Lair", '14.Ruins of Acaroth', '15.Rotten Forest',
                   '16.Hushwood', "17.Bandit's Lair", '18.Glacial Heights', "19.Ha'Kraj Plateau", '20.Pit of Fire',
                   '21.Pandaemonium', '22.Fungal Forest', '23.Rotwick', '24.Ancient Necropolis', '25.Nightfang Swale',
                   '26.Castle Blackburn'],
@@ -157,7 +156,9 @@ GAME_CONFIG = {
         'power': ['Reinforcements', 'Rain of Fire', 'Royal Edict', 'Teleportation Sigil', 'Ace Musketeers',
                   'Soaring Shop', 'Thunder Zapper', "Wintersong's Wrath", 'Aspect of Sol'],
         'level': ['1.Linirean Castle', '2.Arcane Academy', '3.Raided Farmlands', '4.Western Wall', '5.Silveroak Village',
-                  '6.Logazon Tower'],
+                  '6.Logazon Tower', '7.Three-side Ambush', '8.Fortress of Acaroth', '9.Path of Peril', '10.Abominable Lair',
+                  '11.Frostbite Nest', "12.Ha'Kraj Village", '13.Stormcloud Halls', '14.Brightwick Town', '15.Castle Blackburn',
+                  '16.Golden Grove', '17.Paladin Enclave', "18.Vez'nan's Tower"],
         'selection_rules': {
             'hero': {'count': 2, 'memory_size_range': (1, 10)},
             'tower': {'count': 5, 'memory_size_range': (1, 10)},
